@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Session Manager</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .container { max-width: 600px; margin: 0 auto; }
+        h1 { text-align: center; }
+        .input-group { margin-bottom: 15px; }
+        input[type="text"], input[type="password"] {
+            width: 100%; padding: 10px; margin-top: 5px;
+            border: 1px solid #ccc; border-radius: 4px;
+        }
+        button {
+            width: 100%; padding: 10px; background-color: #4CAF50; color: white;
+            border: none; border-radius: 4px; cursor: pointer;
+        }
+        button:hover { background-color: #45a049; }
+        .output { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Session Manager</h1>
+
+        <div class="input-group">
+            <label for="user_id">Enter User ID</label>
+            <input type="text" id="user_id" placeholder="Enter your user ID">
+        </div>
+        <div class="input-group">
+            <label for="password">Enter Password (optional)</label>
+            <input type="password" id="password" placeholder="Enter session password (optional)">
+        </div>
+        <button onclick="startSession()">Start Session</button>
+
+        <div class="input-group">
+            <label for="session_id">Enter Session ID to Check Status</label>
+            <input type="text" id="session_id" placeholder="Enter session ID">
+        </div>
+        <button onclick="checkStatus()">Check Session Status</button>
+
+        <div class="input-group">
+            <label for="unlock_password">Enter Password to Unlock Session</label>
+            <input type="password" id="unlock_password" placeholder="Enter session unlock password">
+        </div>
+        <button onclick="unlockSession()">Unlock Session</button>
+
+        <pre class="output" id="output"></pre>
+    </div>
+
+    <script>
+        async function startSession() {
+            const user_id = document.getElementById("user_id").value;
+            const password = document.getElementById("password").value;
+
+            const response = await fetch("/start", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ user_id: user_id, password: password })
+            });
+            const data = await response.json();
+            document.getElementById("output").textContent = JSON.stringify(data, null, 2);
+        }
+
+        async function checkStatus() {
+            const session_id = document.getElementById("session_id").value;
+
+            const response = await fetch(`/status/${session_id}`);
+            const data = await response.json();
+            document.getElementById("output").textContent = JSON.stringify(data, null, 2);
+        }
+
+        async function unlockSession() {
+            const session_id = document.getElementById("session_id").value;
+            const password = document.getElementById("unlock_password").value;
+
+            const response = await fetch("/unlock", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ session_id: session_id, password: password })
+            });
+            const data = await response.json();
+            document.getElementById("output").textContent = JSON.stringify(data, null, 2);
+        }
+    </script>
+</body>
+</html>
