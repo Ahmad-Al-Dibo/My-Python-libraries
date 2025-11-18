@@ -1,0 +1,52 @@
+{
+  "animals": [
+      {
+          "name": "kat",
+          "has_fur": true,
+          "can_fly": false,
+          "lives_in_water": false,
+          "is_domestic": true,
+          "size": "small"
+      },
+      {
+          "name": "papegaai",
+          "has_fur": false,
+          "can_fly": true,
+          "lives_in_water": false,
+          "is_domestic": true,
+          "size": "small"
+      },
+      {
+          "name": "olifant",
+          "has_fur": false,
+          "can_fly": false,
+          "lives_in_water": false,
+          "is_domestic": false,
+          "size": "large"
+      },
+      {
+          "name": "arend",
+          "has_fur": false,
+          "can_fly": true,
+          "lives_in_water": false,
+          "is_domestic": false,
+          "size": "large"
+      },
+      {
+          "name": "pauw",
+          "has_fur": false,
+          "can_fly": true,
+          "lives_in_water": false,
+          "is_domestic": true,
+          "size": "medium"
+      },
+      {
+          "name": "kamelen",
+          "has_fur": true,
+          "can_fly": false,
+          "lives_in_water": false,
+          "is_domestic": true,
+          "size": "large"
+      }
+  ]
+}
